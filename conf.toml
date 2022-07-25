@@ -1,0 +1,15 @@
+[Mysql]
+Db = "yearning"
+Host = "192.168.200.99"
+Port = "3306"
+Password = "ukC2ZkcG_ZTeb"
+User = "yearning"
+
+[General]
+SecretKey = "aaajqheupqjsuwsm"
+Hours = 4
+
+GrpcAddr = "127.0.0.1:50001"
+Proxy = "http://192.168.200.1:8080"
+
+

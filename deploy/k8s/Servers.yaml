@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sql-mysql-proxy-nodeport
+  namespace: default
+  labels:
+    app: ops-sql
+    server: mysql-proxy
+spec:
+  ports:
+    - name: http-api
+      protocol: TCP
+      port: 8080
+      nodePort: 31000
+    - name: port1
+      protocol: TCP
+      port: 33001
+      nodePort: 31001
+    - name: port2
+      protocol: TCP
+      port: 33002
+      nodePort: 33002
+    - name: port3
+      protocol: TCP
+      port: 33003
+      nodePort: 33003
+  selector:
+    app: ops-sql
+    server: mysql-proxy
+  type: NodePort
+

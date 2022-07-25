@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-mysql-proxy
+  namespace: default
+  labels:
+    app: ops-sql
+    server: mysql-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ops-sql
+      server: mysql-proxy
+  template:
+    metadata:
+      labels:
+        app: ops-sql
+        server: mysql-proxy
+      # annotations:
+      #   linkerd.io/inject: enabled
+    spec:
+      volumes:
+        - name: sql-web-config-volumes
+          configMap:
+            name: sql-web-config
+            defaultMode: 420
+      containers:
+        - name: mysql-proxy
+          image: harbor.was.ink/ops/mysql-proxy:v1
+          ports:
+            - containerPort: 33001
+              protocol: TCP
+            - containerPort: 33002
+              protocol: TCP
+            - containerPort: 33003
+              protocol: TCP
+          volumeMounts:
+            - name: sql-web-config-volumes
+              mountPath: /app/conf.toml
+              subPath: conf.toml
+
+
+

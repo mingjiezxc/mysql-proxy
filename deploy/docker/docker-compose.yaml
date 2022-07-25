@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  app:
+    image: mysql-proxy:least
+    ports:
+        - 13301:13301
+        - 13302:13302
+    volumes:
+        - ./conf.toml:/app/conf.toml
